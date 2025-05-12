@@ -1,5 +1,7 @@
 # src/app/core.py
 
+from typing import Union
+
 class TaskManager:
     """Gerencia uma lista de tarefas."""
 
@@ -77,19 +79,19 @@ class TaskManager:
         self._tasks = [task for task in self._tasks if task['id'] != task_id]
         return len(self._tasks) < initial_len
 
-    def get_task_by_id(self, task_id: int) -> dict | None:
-         """Busca uma tarefa pelo seu ID.
+    def get_task_by_id(self, task_id: int) -> Union[dict, None]:
+        """Busca uma tarefa pelo seu ID.
 
-         Args:
-             task_id: O ID da tarefa.
+        Args:
+            task_id: O ID da tarefa.
 
-         Returns:
-             O dicionário da tarefa se encontrada, None caso contrário.
-         """
-         for task in self._tasks:
-             if task['id'] == task_id:
-                 return task
-         return None
+        Returns:
+            O dicionário da tarefa se encontrada, None caso contrário.
+        """
+        for task in self._tasks:
+            if task['id'] == task_id:
+                return task
+        return None
 
     def clear_all_tasks(self):
         """Remove todas as tarefas."""
