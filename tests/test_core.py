@@ -1,7 +1,7 @@
 # tests/test_core.py
 
 import pytest
-from todo_app.core import TaskManager
+from app.core import TaskManager
 
 # Fixture para criar uma instância limpa do TaskManager para cada teste
 @pytest.fixture

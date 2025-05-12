@@ -1,6 +1,6 @@
 # src/main.py
 
-from todo_app.core import TaskManager
+from app.core import TaskManager
 
 def print_tasks(tasks: list[dict]):
     """Imprime a lista de tarefas formatada."""

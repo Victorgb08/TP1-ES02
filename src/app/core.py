@@ -1,4 +1,4 @@
-# src/todo_app/core.py
+# src/app/core.py
 
 class TaskManager:
     """Gerencia uma lista de tarefas."""
