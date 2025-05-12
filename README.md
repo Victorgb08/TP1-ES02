@@ -4,9 +4,8 @@ Este repositório contém uma aplicação simples de linha de comando (CLI) para
 
 ## 1. Membros do Grupo
 
-* [Seu Nome Completo Aqui]
-* [Nome Completo do Membro 2 (se aplicável)]
-* ...
+* Victor Guedes Batista
+* Pedro Henrique Faluba Martins
 
 ## 2. Explicação do Sistema
 
