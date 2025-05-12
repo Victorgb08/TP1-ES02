@@ -31,14 +31,24 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Set PYTHONPATH
-      shell: bash  # Garante que o Bash será usado
-      run: |
-        if [[ "$RUNNER_OS" == "Windows" ]]; then
-          echo "PYTHONPATH=$PYTHONPATH;$(pwd)/src" >> $GITHUB_ENV
-        else
-          echo "PYTHONPATH=$PYTHONPATH:$(pwd)/src" >> $GITHUB_ENV
-        fi
+        - name: Show Python's sys.path before pytest
+        shell: python # Usa o interpretador python diretamente
+        run: |
+          import sys
+          import os
+          print(f"--- Debug Python Env ---")
+          print(f"PYTHONPATH environment variable: {os.environ.get('PYTHONPATH')}")
+          print(f"sys.path: {sys.path}")
+          print(f"Current working directory: {os.getcwd()}")
+          # Listar conteúdo do diretório src para ver se 'app' está lá
+          print(f"Contents of ./src:")
+          try:
+              print(os.listdir('./src'))
+          except FileNotFoundError:
+              print("./src not found")
+          print(f"Contents of .: ")
+          print(os.listdir('.'))
+          print(f"--- End Debug ---")
 
     - name: Run tests with pytest
-      run: pytest
+      run: python -m pytest -v
