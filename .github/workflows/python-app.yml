@@ -1,0 +1,40 @@
+# .github/workflows/python-app.yml
+
+name: Python application tests
+
+on:
+  push: # Executa em pushes para qualquer branch
+    branches: [ "**" ] # Pode restringir para main, develop, etc. se quiser
+  pull_request: # Executa em pull requests para qualquer branch
+    branches: [ "**" ]
+
+jobs:
+  build:
+    # Executa em paralelo nos três sistemas operacionais
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false # Permite que outros jobs continuem mesmo se um falhar
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        # Você pode testar com múltiplas versões do Python também
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+
+    steps:
+    - name: Checkout code # Baixa o código do repositório
+      uses: actions/checkout@v4 # Use a versão mais recente
+
+    - name: Set up Python ${{ matrix.python-version }} # Configura a versão do Python
+      uses: actions/setup-python@v5 # Use a versão mais recente
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies # Instala as dependências do projeto
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run tests with pytest # Executa os testes
+      run: |
+        # O pytest descobrirá e executará os testes na pasta 'tests'
+        # Adicione `-v` para verbose ou outras flags se necessário
+        pytest
