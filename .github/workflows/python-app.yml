@@ -18,21 +18,21 @@ jobs:
         python-version: ["3.9", "3.10", "3.11", "3.12"]
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-        - name: Show Python's sys.path before pytest
-        shell: python # Usa o interpretador python diretamente
+      - name: Show Python's sys.path before pytest
+        shell: python
         run: |
           import sys
           import os
@@ -50,5 +50,5 @@ jobs:
           print(os.listdir('.'))
           print(f"--- End Debug ---")
 
-    - name: Run tests with pytest
-      run: python -m pytest -v
+      - name: Run tests with pytest
+        run: pytest
